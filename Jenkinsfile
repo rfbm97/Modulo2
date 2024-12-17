@@ -21,7 +21,7 @@ pipeline {
                 sh 'hostname'
 
                 //Descargamos el codigo del repositorio
-                git 'https://github.com/rfbm97/Modulo2'
+                git branch: 'develop', url: 'https://github.com/rfbm97/Modulo2' 
                 // Guardo los archivos en un área de almacenamiento temporal compartido entre los agentes con stash 
                 stash includes: '**/*', name: 'Files'
                 
