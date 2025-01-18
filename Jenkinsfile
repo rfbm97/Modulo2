@@ -8,7 +8,7 @@ pipeline {
 
             steps { 
 
-                git 'https://github.com/rfbm97/Modulo2' 
+                git branch: 'develop', url: 'https://github.com/rfbm97/Modulo2.git'
 
             } 
 
