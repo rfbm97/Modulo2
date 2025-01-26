@@ -150,6 +150,11 @@ pipeline {
                 unstash 'Files'
                 sh '''
 
+                    # Lanzamos Flask
+                    export FLASK_APP=${WORKSPACE}/app/api.py 
+
+                    flask run --host=0.0.0.0 --port=5000 & 
+
                     # Verificamos que Flask está levantado
                     until curl -s http://localhost:5000; do echo "Esperando a Flask..."; sleep 5; done
                    
