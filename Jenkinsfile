@@ -75,9 +75,18 @@ pipeline {
 
         }
 
-        
-
-        
+        stage('Static'){
+            steps{
+                // Ejecutamos flake8 para realizar las pruebas estáticas y exportamos los resultados a flake8.out
+                sh '''
+                python3 -m flake8 --format=pylint --exit-zero app>flake8.out
+                '''
+                // Vemos los resultados de forma gráfica, utilizando el plugin warnings-ng
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
+                    recordIssues tools: [flake8(name: 'Flake8', pattern: 'flake8.out')], qualityGates: [[threshold: 8, type: 'TOTAL', unstable: true], [threshold: 10, type: 'TOTAL', unstable: false]]
+                }
+            }
+        }
 
         stage('Performance'){
             steps{
@@ -101,7 +110,7 @@ pipeline {
                 
                 sh '''
                 # Lanzamos pruebas de cobertura
-                python3 -m coverage run --source=app --omit=app/__init__.py,app/api.py -m pytest test/unit
+                python3 -m coverage run --branch --source=app --omit=app/__init__.py,app/api.py -m pytest test/unit
                 
                 # Exportamos los resultados
                 python3 -m coverage xml
@@ -113,18 +122,7 @@ pipeline {
                 }
             }
         }
-        stage('Static'){
-            steps{
-                // Ejecutamos flake8 para realizar las pruebas estáticas y exportamos los resultados a flake8.out
-                sh '''
-                python3 -m flake8 --format=pylint --exit-zero app>flake8.out
-                '''
-                // Vemos los resultados de forma gráfica, utilizando el plugin warnings-ng
-                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
-                    recordIssues tools: [flake8(name: 'Flake8', pattern: 'flake8.out')], qualityGates: [[threshold: 8, type: 'TOTAL', unstable: true], [threshold: 10, type: 'TOTAL', unstable: false]]
-                }
-            }
-        }
+        
 
     } 
 
