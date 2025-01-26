@@ -90,6 +90,11 @@ pipeline {
         stage('Performance'){
             steps{
                 sh '''
+
+                   
+                    
+                    # Verificamos que Flask está levantado
+                    until curl -s http://localhost:5000; do echo "Esperando a Flask..."; sleep 5; done
                    
                     # Realizamos pruebas de rendimiento
                     /usr/local/bin/apache-jmeter-5.6.3/bin/jmeter -n -t ${WORKSPACE}/test/jmeter/flask.jmx -f -l flask.jtl
