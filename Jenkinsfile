@@ -21,7 +21,7 @@ pipeline {
                 sh ''' 
                 export PYTHONPATH=${WORKSPACE} 
 
-                pytest --junitxml=result-unit.xml test/unit 
+                pytest --junitxml=result-unit.xml ${WORKSPACE}/test/unit 
 
                 ''' 
 
