@@ -91,8 +91,6 @@ pipeline {
             steps{
                 sh '''
 
-                   
-                    
                     # Verificamos que Flask está levantado
                     until curl -s http://localhost:5000; do echo "Esperando a Flask..."; sleep 5; done
                    
