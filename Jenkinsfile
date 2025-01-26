@@ -90,11 +90,7 @@ pipeline {
         stage('Performance'){
             steps{
                 sh '''
-                    # Lanzamos flask
-                    export FLASK_APP=${WORKSPACE}/app/api.py 
-
-                    flask run --host=0.0.0.0 --port=5000 & 
-                    
+                   
                     # Realizamos pruebas de rendimiento
                     /usr/local/bin/apache-jmeter-5.6.3/bin/jmeter -n -t ${WORKSPACE}/test/jmeter/flask.jmx -f -l flask.jtl
                 '''
