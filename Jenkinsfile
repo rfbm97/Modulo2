@@ -113,7 +113,7 @@ pipeline {
                 python3 -m coverage run --branch --source=app --omit=app/__init__.py,app/api.py -m pytest test/unit
                 
                 # Exportamos los resultados
-                python3 -m coverage xml
+                python3 -m coverage xml -o ${WORKSPACE}/coverage.xml
                 '''
 
                 // Exponemos los resultados de forma gráfica con el plugin cobertura
