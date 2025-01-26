@@ -75,10 +75,12 @@ pipeline {
 
         stage('Security'){
             steps{
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                 // Ejecutamos bandit para realizar las pruebas de seguridad
                 sh'''
-                python3 -m bandit --exit-zero -r . -f custom -o bandit.out --msg-template "{abspath}:{line}: {severity}: {test_id}: {msg}"
+                python3 -m bandit -r . -f custom -o bandit.out --msg-template "{abspath}:{line}: {severity}: {test_id}: {msg}"
                 '''
+                }
                 // Vemos los resultados de forma gráfica, utilizando el plugin warnings-ng
                 recordIssues tools: [pyLint(name: 'Bandit', pattern: 'bandit.out')], qualityGates: [[threshold: 2, type: 'TOTAL', unstable: true], [threshold: 4, type: 'TOTAL', unstable: false]]
                 
