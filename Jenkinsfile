@@ -118,7 +118,7 @@ pipeline {
 
                 // Exponemos los resultados de forma gráfica con el plugin cobertura
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){    
-                    cobertura coberturaReportFile: 'coverage.xml', onlyStable: false, conditionalCoverageTargets: '90,0,80', lineCoverageTargets: '95,0,85'
+                    cobertura coberturaReportFile: 'coverage.xml', onlyStable: false, conditionalCoverageTargets: '100,0,80', lineCoverageTargets: '100,0,85'
                 }
             }
         }
