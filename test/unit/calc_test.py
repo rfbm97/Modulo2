@@ -27,9 +27,7 @@ class TestCalculate(unittest.TestCase):
         self.assertRaises(TypeError, self.calc.divide, "2", 2)
 
     def test_divide_method_fails_with_zerp_parameter(self):
-        self.assertRaises(1, self.calc.divide(2, 0))
-        self.assertRaises(1.5, self.calc.divide(3, 0))
-        self.assertRaises(TypeError, self.calc.divide, "2", 0)
+        self.assertRaises(TypeError, self.calc.divide, 2, 0)
 
   
     def test_add_method_fails_with_nan_parameter(self):
