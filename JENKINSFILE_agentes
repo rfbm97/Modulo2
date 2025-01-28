@@ -169,8 +169,9 @@ pipeline {
        }
         
         stage('Coverage'){
+            agent {label 'coverage'}
             steps{
-                agent {label 'coverage'}
+                
                 echo 'Usuario en el que se ejecuta la sesion'
                 sh 'whoami'
 
