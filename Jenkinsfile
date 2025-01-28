@@ -8,7 +8,7 @@ pipeline {
 
             steps { 
 
-                git branch: 'master', url: 'https://github.com/rfbm97/Modulo2' 
+                git branch: 'feature_fix_coverage', url: 'https://github.com/rfbm97/Modulo2' 
 
             } 
 
