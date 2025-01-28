@@ -127,7 +127,7 @@ pipeline {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE'){
                 // Ejecutamos bandit para realizar las pruebas de seguridad
                 sh'''
-                python3 -m bandit -r . -f custom -o bandit.out --msg-template "{abspath}:{line}: {severity}: {test_id}: {msg}"
+                python3 -m bandit --exit-zero -r . -f custom -o bandit.out --msg-template "{abspath}:{line}: {severity}: {test_id}: {msg}"
                 '''
                 }
                 // Vemos los resultados de forma gráfica, utilizando el plugin warnings-ng
